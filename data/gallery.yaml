@@ -1,0 +1,29 @@
+- title: "Microtubule Tyrosination Live Sensor"
+  category: "Microscopy"
+  caption: "Live-cell recording of genetically encoded biosensor tracking tubulin tyrosination dynamics."
+  image: "media/gallery/tyrosination-sensor.gif"
+
+- title: "In Vitro Motor Gliding Assay"
+  category: "Microscopy"
+  caption: "Active kinesin-1 motors driving fluorescent polarity-marked microtubule gliding."
+  image: "media/gallery/gliding-assay.gif"
+
+- title: "CLARITY Whole-Heart Tissue Imaging"
+  category: "Histology"
+  caption: "Optical clearing of ventricular myocardium revealing 3D cardiomyocyte orientation."
+  image: "media/gallery/clarity-heart.jpg"
+
+- title: "High-Resolution Cryo-EM Micrograph"
+  category: "Microscopy"
+  caption: "Cryo-electron microscopy reconstruction of decorated microtubule lattice structures."
+  image: "media/hero/cytoskeleton-EM-1.png"
+
+- title: "Mitotic Spindle Architecture"
+  category: "Microscopy"
+  caption: "Fluorescence microscopy of chromosome segregation and spindle microtubules."
+  image: "media/hero/mitosis.png"
+
+- title: "Tubulin CTT Hotspots"
+  category: "Structural Biology"
+  caption: "Molecular model of C-terminal tails projecting from the outer microtubule surface."
+  image: "media/hero/CTT-MTs.png"

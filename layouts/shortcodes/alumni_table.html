@@ -1,0 +1,82 @@
+{{/* Custom Shortcode: alumni_table.html */}}
+{{/* Reads assets/data/alumni.csv and renders a modern, responsive, filterable table */}}
+
+{{ $csvData := "" }}
+{{ with resources.Get "data/alumni.csv" }}
+  {{ $csvData = .Content }}
+{{ end }}
+
+<div class="alumni-container my-4">
+  <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div class="input-group" style="max-width: 320px;">
+      <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
+      <input type="text" id="alumni-search" class="form-control border-start-0" placeholder="Filter alumni by name, role, institution..." aria-label="Filter alumni">
+    </div>
+    <span class="badge bg-secondary" id="alumni-count">Loading alumni...</span>
+  </div>
+
+  <div class="table-responsive shadow-sm rounded border">
+    <table class="table table-hover table-striped align-middle mb-0" id="alumni-table">
+      <thead class="table-light border-bottom">
+        <tr>
+          <th scope="col" class="py-3 px-3">Name</th>
+          <th scope="col" class="py-3 px-3">Lab Role</th>
+          <th scope="col" class="py-3 px-3">Period</th>
+          <th scope="col" class="py-3 px-3">Current Position / Destination</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ $rows := split $csvData "\n" }}
+        {{ range $i, $row := $rows }}
+          {{ if and (gt $i 0) (ne (trim $row " \r\n") "") }}
+            {{/* Parse CSV cells handling quoted strings */}}
+            {{ $cells := split $row "\"," }}
+            {{ if ge (len $cells) 4 }}
+              {{ $name := trim (index $cells 0) "\" " }}
+              {{ $role := trim (index $cells 1) "\" " }}
+              {{ $period := trim (index $cells 2) "\" " }}
+              {{ $destCell := index $cells 3 }}
+              {{ $dest := trim (index (split $destCell "\",") 0) "\" \r\n" }}
+              <tr>
+                <td class="px-3 fw-semibold text-dark">{{ $name }}</td>
+                <td class="px-3"><span class="badge bg-light text-dark border">{{ $role }}</span></td>
+                <td class="px-3 text-muted">{{ $period }}</td>
+                <td class="px-3">{{ $dest }}</td>
+              </tr>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('alumni-search');
+  const table = document.getElementById('alumni-table');
+  const countBadge = document.getElementById('alumni-count');
+  if (!table || !searchInput) return;
+
+  const rows = table.querySelectorAll('tbody tr');
+  function updateCount(visible) {
+    if (countBadge) countBadge.textContent = `${visible} Alumni`;
+  }
+  updateCount(rows.length);
+
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+    let visible = 0;
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      if (text.includes(query)) {
+        row.style.display = '';
+        visible++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    updateCount(visible);
+  });
+});
+</script>
