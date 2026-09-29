@@ -1,0 +1,81 @@
+{{/* Hugo Blox: Outreach Row */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+<div class="row">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading text-center mb-4">
+    <h1 class="fw-bold text-white">{{ . | markdownify | emojify }}</h1>
+    {{ if $block.content.subtitle }}<p class="text-muted">{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  <div class="col-12">
+    <div class="outreach-row-wrapper my-2">
+      <div class="row g-4 row-cols-1 row-cols-md-3">
+        <!-- Card 1: PopSci Book -->
+        <div class="col">
+          <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-0" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="p-3" style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(15, 23, 42, 0.4));">
+              <span class="badge bg-primary-subtle text-primary mb-2 px-2 py-1"><i class="fas fa-book-open me-1"></i> Popular Science Book</span>
+              <h5 class="fw-bold text-white fs-6 mb-1">Actually, Colors Speak</h5>
+              <div class="text-muted small">In collaboration with Ipsa Jain</div>
+            </div>
+            <div class="card-body p-3">
+              <p class="text-muted small mb-0" style="line-height: 1.5;">
+                An illustrated science book narrating how exterior animal color changes originate deep inside cells through cytoskeleton molecular motors.
+              </p>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-3 pt-0">
+              <a href="/outreach/actually-colors-speak/" class="btn btn-sm btn-outline-info rounded-pill w-100 fw-semibold">
+                Read Online Preview →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: DIY Experiment Video -->
+        <div class="col">
+          <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-0" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="p-3" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(15, 23, 42, 0.4));">
+              <span class="badge bg-info-subtle text-info mb-2 px-2 py-1"><i class="fas fa-video me-1"></i> Hands-on DIY Video</span>
+              <h5 class="fw-bold text-white fs-6 mb-1">Color Change in Fish</h5>
+              <div class="text-muted small">Biological Explanation & Demo</div>
+            </div>
+            <div class="card-body p-3">
+              <p class="text-muted small mb-0" style="line-height: 1.5;">
+                Hands-on demonstration showing how fish chromatophores rapidly disperse and aggregate melanosomes along microtubule tracks.
+              </p>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-3 pt-0">
+              <a href="/outreach/color-change-fish/" class="btn btn-sm btn-outline-info rounded-pill w-100 fw-semibold">
+                Watch Experiment →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Documentary Film -->
+        <div class="col">
+          <div class="card h-100 border-0 rounded-4 overflow-hidden shadow-sm d-flex flex-column justify-content-between p-0" style="background-color: #111c33; border: 1px solid rgba(245, 158, 11, 0.2) !important;">
+            <div class="p-3" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(15, 23, 42, 0.4));">
+              <span class="badge bg-warning-subtle text-warning mb-2 px-2 py-1"><i class="fas fa-film me-1"></i> Documentary Film</span>
+              <h5 class="fw-bold text-white fs-6 mb-1">Written Out of History</h5>
+              <div class="text-muted small">Funded by DBT/WT India Alliance</div>
+            </div>
+            <div class="card-body p-3">
+              <p class="text-muted small mb-0" style="line-height: 1.5;">
+                Documentary spotlighting three unsung Indian scientists: Dr. Sambhunath De (Cholera toxin), Dr. Sipra Guha-Mukherjee, and Dr. Obaid Siddiqi.
+              </p>
+            </div>
+            <div class="card-footer bg-transparent border-0 p-3 pt-0">
+              <a href="/outreach/forgotten-indian-scientists/" class="btn btn-sm btn-outline-warning rounded-pill w-100 fw-semibold">
+                Explore Documentary →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

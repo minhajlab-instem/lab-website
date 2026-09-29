@@ -1,0 +1,28 @@
+milestones:
+  - date: "May 2026"
+    badge: "Preprint"
+    badge_color: "info"
+    title: "Vimentin Proteoform Binder on bioRxiv"
+    summary: "Glutamylated vimentin proteoform identified by a synthetic binder links to epithelial-mesenchymal plasticity."
+    link: "https://doi.org/10.64898/2026.05.12.724742"
+
+  - date: "Sep 2023"
+    badge: "EMBO J"
+    badge_color: "success"
+    title: "Structural Insights into Cellular Actin Markers"
+    summary: "Cryo-EM investigation of F-actin filament recognition by standard cell biology markers."
+    link: "https://doi.org/10.15252/embj.2023113986"
+
+  - date: "Jun 2022"
+    badge: "JCB"
+    badge_color: "primary"
+    title: "Live-Cell Sensor for Tyrosinated Microtubules"
+    summary: "Development of a genetically encoded live-cell sensor tracking dynamic microtubule tyrosination."
+    link: "https://doi.org/10.1083/jcb.202106112"
+
+  - date: "Lab Milestone"
+    badge: "Anniversary"
+    badge_color: "warning"
+    title: "10 Years of the Cytoskeleton Lab"
+    summary: "Celebrating a decade of research exploring cytoskeleton and motility systems across length scales at iBRIC-inStem."
+    link: "/research/"

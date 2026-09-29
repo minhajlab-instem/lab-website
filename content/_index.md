@@ -7,80 +7,102 @@ sections:
   - block: slider
     content:
       slides:
-        - title: "Cytoskeleton & Motility Across Scales"
-          content: "Investigating eukaryotic cytoskeleton systems from atomic cryo-EM structures to the mechanics of beating heart walls."
+        - title: "Microtubule Architectures & Cryo-EM"
+          content: "Sub-nanometer cryo-EM visualization of native tubulin lattices, protofilament dynamics, and motor interfaces."
           align: left
           background:
             image:
               filename: hero/cytoskeleton-EM-1.png
               filters:
-                brightness: 0.52
+                brightness: 0.65
             size: cover
             position: center
-          link:
-            url: /research/
-            text: Explore Research
-            icon: microscope
-            icon_pack: fas
-        - title: "Decoding the Tubulin Code & Motors"
-          content: "Deciphering how tubulin post-translational modifications regulate kinesin and dynein motility in cellular dynamics and disease."
+        - title: "The Tubulin Code & Molecular Motors"
+          content: "Deciphering how polyglutamylation and tyrosination states on C-terminal tails orchestrate cellular transport."
           align: left
           background:
             image:
               filename: hero/CTT-MTs.png
               filters:
-                brightness: 0.52
+                brightness: 0.65
             size: cover
             position: center
-          link:
-            url: /publication/
-            text: Latest Publications
-            icon: book-open
-            icon_pack: fas
-        - title: "Mitotic Spindle & Cellular Dynamics"
-          content: "Bridging the knowledge gap between clinical genetic findings and fundamental molecular biology."
+        - title: "Mitotic Spindle & Force Generation"
+          content: "Super-resolution and fluorescence imaging unraveling tension, kinetochore capture, and chromosome segregation."
           align: left
           background:
             image:
               filename: hero/mitosis.png
               filters:
-                brightness: 0.52
+                brightness: 0.65
             size: cover
             position: center
-          link:
-            url: /people/
-            text: Meet the Team
-            icon: users
-            icon_pack: fas
     design:
-      slide_height: '560px'
+      slide_height: '500px'
       is_fullscreen: false
 
-  - block: collection
+  - block: markdown
     content:
-      title: "Research Themes"
-      subtitle: "Cytoskeleton across length scales"
-      text: "Our core areas of structural biology, biochemistry, and cellular dynamics"
-      page_type: research
-      count: 6
-      sort_by: weight
+      title: ""
+      subtitle: ""
+      text: |
+        <div class="welcome-section text-center py-4 my-2">
+          <div class="badge rounded-pill px-3 py-2 text-uppercase tracking-wider mb-3 fw-semibold welcome-badge">
+            <i class="fas fa-microscope me-2"></i> Welcome to the Cytoskeleton Lab @ inStem
+          </div>
+          <h2 class="welcome-heading fw-bold mb-3">
+            Exploring Cytoskeleton Systems <span class="text-teal-gradient">Across Length Scales</span>
+          </h2>
+          <p class="welcome-lead mx-auto mb-4 text-muted">
+            The eukaryotic cytoskeleton is a marvel of cellular engineering—providing structural integrity, powering intracellular highways, and driving cell division and motility. At the <strong>Minhaj Sirajuddin Lab</strong>, Centre for Cardiovascular Biology and Disease (CCBD), Institute for Stem Cell Science and Regenerative Medicine (inStem), Bengaluru, we explore how molecular mechanics at the single-protein level scale up to govern organ physiology and human disease.
+          </p>
+          <div class="row g-3 justify-content-center text-start mt-2">
+            <div class="col-12 col-md-4">
+              <div class="p-3 rounded-4 welcome-feature-card h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="welcome-icon-box me-3"><i class="fas fa-atom"></i></div>
+                  <h6 class="fw-bold mb-0 text-white">Structural Biology</h6>
+                </div>
+                <p class="small text-muted mb-0">High-resolution cryo-EM and crystallography revealing atomic mechanisms of tubulin-modifying enzymes.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="p-3 rounded-4 welcome-feature-card h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="welcome-icon-box me-3"><i class="fas fa-vial"></i></div>
+                  <h6 class="fw-bold mb-0 text-white">Single-Molecule Biophysics</h6>
+                </div>
+                <p class="small text-muted mb-0">Total Internal Reflection Fluorescence (TIRF) and biosensors tracking motor stepping and modification waves.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="p-3 rounded-4 welcome-feature-card h-100">
+                <div class="d-flex align-items-center mb-2">
+                  <div class="welcome-icon-box me-3"><i class="fas fa-heartbeat"></i></div>
+                  <h6 class="fw-bold mb-0 text-white">Cardiomyopathy & Physiology</h6>
+                </div>
+                <p class="small text-muted mb-0">Translating microtubule detyrosination dynamics to heart wall stiffness, contractility, and cardiac therapeutics.</p>
+              </div>
+            </div>
+          </div>
+        </div>
     design:
-      view: card
-      columns: 3
+      columns: '1'
 
-  - block: people
+  - block: research_row
     content:
-      title: "Our Team"
-      subtitle: "Meet the researchers driving our discoveries"
-      user_groups:
-        - Principal Investigator
-        - Postdoctoral Fellows
-        - Graduate Students
-        - Research Fellows
-    design:
-      show_interests: true
-      show_role: true
-      show_social: true
+      title: "Research Programs"
+      subtitle: "Cytoskeleton across length scales: from atomic structures to tissue physiology"
+
+  - block: news_milestones
+    content:
+      title: "News & Milestones"
+      subtitle: "Latest Breakthroughs, Preprints & Social Updates"
+
+  - block: outreach_row
+    content:
+      title: "Science Communication & Outreach"
+      subtitle: "Connecting Fundamental Cytoskeleton Science with Society"
 
   - block: collection
     content:
@@ -93,28 +115,4 @@ sections:
     design:
       view: citation
       columns: 1
-
-  - block: markdown
-    content:
-      title: "Public Engagement & Outreach"
-      subtitle: "Connecting fundamental science with society"
-      text: |
-        <div class="row g-4 align-items-center">
-          <div class="col-md-6">
-            <div class="p-4 bg-light rounded-4 shadow-sm h-100 border-start border-4 border-primary">
-              <h4 class="fw-bold mb-2"><i class="fas fa-book-open me-2 text-primary"></i> Actually, Colors Speak</h4>
-              <p class="text-muted small">An illustrated popular science book authored by the lab explaining the molecular cytoskeletal basis of animal color change.</p>
-              <a href="/outreach/actually-colors-speak/" class="btn btn-outline-primary btn-sm rounded-pill px-3">Read More →</a>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="p-4 bg-light rounded-4 shadow-sm h-100 border-start border-4 border-info">
-              <h4 class="fw-bold mb-2"><i class="fas fa-film me-2 text-info"></i> Written Out of History</h4>
-              <p class="text-muted small">A documentary film spotlighting three pioneering Indian scientists: Dr. Sambhunath De, Dr. Sipra Guha-Mukherjee, and Dr. Obaid Siddiqi.</p>
-              <a href="/outreach/forgotten-indian-scientists/" class="btn btn-outline-info btn-sm rounded-pill px-3">Watch Documentary →</a>
-            </div>
-          </div>
-        </div>
-    design:
-      columns: '1'
 ---

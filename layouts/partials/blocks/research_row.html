@@ -1,0 +1,55 @@
+{{/* Hugo Blox: Research Row */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+<div class="row">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading text-center mb-4">
+    <h1 class="fw-bold text-white">{{ . | markdownify | emojify }}</h1>
+    {{ if $block.content.subtitle }}<p class="text-muted">{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  <div class="col-12">
+    {{ $researchPages := where site.RegularPages "Section" "research" }}
+    <div class="research-row-wrapper my-2">
+      <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+        {{ range $researchPages }}
+          {{ $img := .Resources.GetMatch "featured.*" }}
+          <div class="col">
+            <a href="{{ .RelPermalink }}" class="text-decoration-none">
+              <div class="card h-100 border-0 rounded-4 overflow-hidden research-compact-card shadow-sm" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+                <div class="research-card-img position-relative overflow-hidden" style="height: 140px; background-color: #060b14;">
+                  {{ if $img }}
+                    <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}" class="w-100 h-100" style="object-fit: cover; transition: transform 0.4s ease;">
+                  {{ else }}
+                    <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
+                      <i class="fas fa-microscope fs-2 text-teal"></i>
+                    </div>
+                  {{ end }}
+                  <div class="position-absolute bottom-0 start-0 end-0 p-2" style="background: linear-gradient(transparent, rgba(17, 28, 51, 0.95));"></div>
+                </div>
+                <div class="card-body p-3 d-flex flex-column justify-content-between">
+                  <div>
+                    <h5 class="card-title fw-bold text-white fs-6 mb-2 line-clamp-2" style="line-height: 1.35;">{{ .Title }}</h5>
+                    <p class="card-text text-muted small line-clamp-3 mb-0" style="font-size: 0.8rem; line-height: 1.45;">{{ .Params.summary }}</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-top border-secondary border-opacity-10 d-flex align-items-center text-teal small fw-semibold">
+                    <span>Learn more</span>
+                    <i class="fas fa-arrow-right ms-1 small"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="/research/" class="btn btn-outline-info rounded-pill px-4 py-2 fw-semibold shadow-sm hover-glow-btn">
+          <i class="fas fa-microscope me-2"></i> View Full Research Programs & Projects →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

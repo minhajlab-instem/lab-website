@@ -1,23 +1,22 @@
 # Theme metadata
-name = "Emerald"
+name = "Bioluminescent Dark"
 
 [light]
-  # Primary - biological teal/emerald
   primary = "#0d9488"
-
-  # Menu
   menu_primary = "#ffffff"
   menu_text = "#1f2937"
   menu_text_active = "#0d9488"
   menu_title = "#111827"
-
-  # Home sections
-  home_section_odd = "rgb(255, 255, 255)"
-  home_section_even = "rgb(248, 250, 252)"
+  home_section_odd = "#0b1120"
+  home_section_even = "#0f172a"
 
 [dark]
-  # Primary in dark mode
   primary = "#2dd4bf"
-
+  menu_primary = "rgba(11, 17, 32, 0.9)"
+  menu_text = "#cbd5e1"
+  menu_text_active = "#2dd4bf"
+  menu_title = "#f8fafc"
+  home_section_odd = "#0b1120"
+  home_section_even = "#0f172a"
   link = "#2dd4bf"
   link_hover = "#5eead4"

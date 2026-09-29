@@ -1,0 +1,105 @@
+{{/* Hugo Blox: News & Milestones */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $data := site.Data.milestones }}
+
+<div class="row">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading text-center mb-4">
+    <h1 class="fw-bold text-white">{{ . | markdownify | emojify }}</h1>
+    {{ if $block.content.subtitle }}<p class="text-muted">{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  <div class="col-12">
+    <div class="news-milestones-wrapper my-2">
+      <div class="row g-4">
+        <!-- Left Column: Pinned Lab Milestones -->
+        <div class="col-12 col-lg-7">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2 border-secondary border-opacity-25">
+              <h4 class="fw-bold mb-0 text-white fs-5">
+                <i class="fas fa-thumbtack text-warning me-2"></i> Pinned Lab Milestones
+              </h4>
+              <span class="badge bg-primary-subtle text-primary small">Key Highlights</span>
+            </div>
+
+            <div class="milestones-timeline">
+              {{ range $data.milestones }}
+                <div class="milestone-item mb-3 pb-3 border-bottom border-secondary border-opacity-10 position-relative">
+                  <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                    <span class="badge bg-{{ .badge_color }} text-white px-2 py-1 small">{{ .badge }}</span>
+                    <span class="text-muted small fw-medium">{{ .date }}</span>
+                  </div>
+                  <h5 class="fs-6 fw-bold mb-1">
+                    <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none hover-teal">
+                      {{ .title }} <i class="fas fa-external-link-alt small text-muted ms-1" style="font-size: 0.75rem;"></i>
+                    </a>
+                  </h5>
+                  <p class="text-muted small mb-0">{{ .summary }}</p>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Social Media & Lab Feed -->
+        <div class="col-12 col-lg-5">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2 border-secondary border-opacity-25">
+              <h4 class="fw-bold mb-0 text-white fs-5">
+                <i class="fab fa-x-twitter text-info me-2"></i> Lab Updates & Social
+              </h4>
+              <span class="badge bg-info-subtle text-info small">Live Stream</span>
+            </div>
+
+            <p class="text-muted small mb-3">
+              Follow our latest research announcements, preprints, cryo-EM data collection sessions, and academic openings.
+            </p>
+
+            <div class="d-flex flex-column gap-3 mb-3">
+              <a href="https://twitter.com/inStem_Bangalore" target="_blank" rel="noopener noreferrer" class="p-3 rounded-3 text-decoration-none d-flex align-items-center justify-content-between bg-dark bg-opacity-50 border border-secondary border-opacity-25 hover-glow-card">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle p-2 bg-dark text-info fs-5 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                    <i class="fab fa-x-twitter"></i>
+                  </div>
+                  <div>
+                    <div class="fw-bold text-white small">@inStem_Bangalore</div>
+                    <div class="text-muted small" style="font-size: 0.78rem;">Official Institute Updates</div>
+                  </div>
+                </div>
+                <span class="btn btn-sm btn-outline-info rounded-pill px-3 py-1">Follow →</span>
+              </a>
+
+              <a href="https://scholar.google.co.in/citations?user=GM_36bwAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="p-3 rounded-3 text-decoration-none d-flex align-items-center justify-content-between bg-dark bg-opacity-50 border border-secondary border-opacity-25 hover-glow-card">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle p-2 bg-dark text-success fs-5 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                    <i class="ai ai-google-scholar"></i>
+                  </div>
+                  <div>
+                    <div class="fw-bold text-white small">Google Scholar</div>
+                    <div class="text-muted small" style="font-size: 0.78rem;">2,900+ Citations • Live Metrics</div>
+                  </div>
+                </div>
+                <span class="btn btn-sm btn-outline-success rounded-pill px-3 py-1">View →</span>
+              </a>
+
+              <a href="https://github.com/minhajlab-instem" target="_blank" rel="noopener noreferrer" class="p-3 rounded-3 text-decoration-none d-flex align-items-center justify-content-between bg-dark bg-opacity-50 border border-secondary border-opacity-25 hover-glow-card">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-circle p-2 bg-dark text-white fs-5 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                    <i class="fab fa-github"></i>
+                  </div>
+                  <div>
+                    <div class="fw-bold text-white small">GitHub Organization</div>
+                    <div class="text-muted small" style="font-size: 0.78rem;">Code, Pipelines & Data</div>
+                  </div>
+                </div>
+                <span class="btn btn-sm btn-outline-light rounded-pill px-3 py-1">Explore →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
