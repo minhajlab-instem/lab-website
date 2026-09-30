@@ -5,8 +5,8 @@
       "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
     },
     "fetch": {
-      "command": "npx.cmd",
-      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
     }
   }
 }
