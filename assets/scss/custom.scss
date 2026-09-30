@@ -98,6 +98,18 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
   font-size: 1.15rem !important;
 }
 
+.navbar-brand img {
+  border-radius: 6px !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.95 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+}
+
+.navbar-brand:hover img {
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+}
+
 .nav-link {
   font-weight: 600 !important;
   font-size: 0.875rem !important;
@@ -363,6 +375,13 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
   background-color: rgba(45, 212, 191, 0.08) !important;
 }
 
+#alumni-search-addon {
+  background-color: #111c33 !important;
+  border: 1px solid rgba(45, 212, 191, 0.25) !important;
+  border-right: none !important;
+  color: #2dd4bf !important;
+}
+
 #alumni-search {
   background-color: #111c33;
   color: #ffffff;
@@ -372,6 +391,17 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
 #alumni-search:focus {
   border-color: #2dd4bf;
   box-shadow: 0 0 0 0.2rem rgba(45, 212, 191, 0.2);
+}
+
+#alumni-table td {
+  color: #e2e8f0;
+}
+
+/* Suppress blog dates on ongoing research program pages */
+.section-research .article-metadata,
+.section-research .article-date,
+.research-row-wrapper .article-date {
+  display: none !important;
 }
 
 /* --------------------------------------------------------------------------

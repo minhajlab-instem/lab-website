@@ -1,7 +1,7 @@
 ---
 title: "Tubulin Code & Microtubule Modifications"
 summary: "Deciphering how tubulin isotypes and post-translational modifications (tyrosination, glycylation, glutamylation) regulate molecular motors and cellular dynamics."
-date: 2026-01-01
+show_date: false
 weight: 10
 tags:
   - Microtubules

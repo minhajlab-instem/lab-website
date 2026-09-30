@@ -1,7 +1,7 @@
 ---
 title: "Actin Filament Recognition & Nuclear Actin"
 summary: "High-resolution structural analysis of actin filament recognition by cellular markers and the organization of actin assemblies in the cytoplasm and nucleus."
-date: 2026-01-01
+show_date: false
 weight: 20
 tags:
   - Actin

@@ -1,7 +1,7 @@
 ---
 title: "Cardiac Cytoskeleton & Cardiomyopathies"
 summary: "Investigating cardiomyocyte myofibrillar architecture, ultrastructure, and orientation across scales to understand healthy contractility and heart disease."
-date: 2026-01-01
+show_date: false
 weight: 30
 tags:
   - Heart

@@ -1,7 +1,7 @@
 ---
 title: "Septin Filament Assembly & GTP Dynamics"
 summary: "Structural and biochemical analysis of mammalian septins, filament formation, nucleotide binding, and membrane-associated non-canonical cytoskeletal functions."
-date: 2026-01-01
+show_date: false
 weight: 50
 tags:
   - Septins

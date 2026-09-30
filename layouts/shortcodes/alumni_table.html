@@ -8,16 +8,16 @@
 
 <div class="alumni-container my-4">
   <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <div class="input-group" style="max-width: 320px;">
-      <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
-      <input type="text" id="alumni-search" class="form-control border-start-0" placeholder="Filter alumni by name, role, institution..." aria-label="Filter alumni">
+    <div class="input-group" style="max-width: 340px;">
+      <span class="input-group-text border-end-0 text-teal" id="alumni-search-addon" style="background-color: #111c33; border-color: rgba(45, 212, 191, 0.25);"><i class="fas fa-search"></i></span>
+      <input type="text" id="alumni-search" class="form-control border-start-0 text-white" placeholder="Filter alumni by name, role, institution..." aria-label="Filter alumni" style="background-color: #111c33; border-color: rgba(45, 212, 191, 0.25);">
     </div>
-    <span class="badge bg-secondary" id="alumni-count">Loading alumni...</span>
+    <span class="badge bg-primary-subtle text-teal border border-teal-subtle px-3 py-2" id="alumni-count">Loading alumni...</span>
   </div>
 
-  <div class="table-responsive shadow-sm rounded border">
-    <table class="table table-hover table-striped align-middle mb-0" id="alumni-table">
-      <thead class="table-light border-bottom">
+  <div class="table-responsive shadow-sm rounded-3 border border-secondary border-opacity-25">
+    <table class="table table-hover align-middle mb-0" id="alumni-table">
+      <thead class="border-bottom border-secondary border-opacity-25">
         <tr>
           <th scope="col" class="py-3 px-3">Name</th>
           <th scope="col" class="py-3 px-3">Lab Role</th>
@@ -38,10 +38,10 @@
               {{ $destCell := index $cells 3 }}
               {{ $dest := trim (index (split $destCell "\",") 0) "\" \r\n" }}
               <tr>
-                <td class="px-3 fw-semibold text-dark">{{ $name }}</td>
-                <td class="px-3"><span class="badge bg-light text-dark border">{{ $role }}</span></td>
-                <td class="px-3 text-muted">{{ $period }}</td>
-                <td class="px-3">{{ $dest }}</td>
+                <td class="px-3 fw-semibold text-white">{{ $name }}</td>
+                <td class="px-3"><span class="badge bg-primary-subtle text-teal border border-secondary border-opacity-25">{{ $role }}</span></td>
+                <td class="px-3 text-secondary small">{{ $period }}</td>
+                <td class="px-3 text-light">{{ $dest }}</td>
               </tr>
             {{ end }}
           {{ end }}

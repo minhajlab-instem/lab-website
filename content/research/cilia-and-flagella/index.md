@@ -1,7 +1,7 @@
 ---
 title: "Cilia, Flagella & Molecular Transport"
 summary: "Understanding the structural mechanisms of doublet microtubule assembly, inner junction proteins, and tubulin polymodifications in ciliary stability."
-date: 2026-01-01
+show_date: false
 weight: 40
 tags:
   - Cilia
