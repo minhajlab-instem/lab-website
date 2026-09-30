@@ -1,0 +1,316 @@
+{{/* Hugo Blox: People Cards */}}
+{{/* Loads assets/data/members.csv and displays horizontal cards in 4 levels */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $csvResource := resources.Get "data/members.csv" }}
+{{ $members := slice }}
+{{ if $csvResource }}
+  {{ $members = $csvResource | transform.Unmarshal }}
+{{ end }}
+
+<div class="row">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading text-center mb-4">
+    <h1 class="fw-bold text-white">{{ . | markdownify | emojify }}</h1>
+    {{ if $block.content.subtitle }}<p class="text-muted">{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  <div class="col-12">
+    {{/* Dummy Avatar Resource */}}
+    {{ $dummyAvatar := "" }}
+    {{ with resources.Get "media/people/dummy-avatar.svg" }}
+      {{ $dummyAvatar = .RelPermalink }}
+    {{ end }}
+
+    {{/* TIER 1: Scientist & Principal Investigator */}}
+    <div class="tier-wrapper mb-5">
+      <div class="tier-heading d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <i class="fas fa-user-tie text-teal fs-4"></i>
+        <h2 class="text-white fw-bold fs-4 mb-0">Scientist &amp; Principal Investigator</h2>
+      </div>
+
+      <div class="row g-4">
+        {{ range $i, $row := $members }}
+          {{ if and (gt $i 0) (eq (index $row 0) "1") }}
+            {{ $name := index $row 2 }}
+            {{ $role := index $row 3 }}
+            {{ $photo := index $row 4 }}
+            {{ $edu := index $row 5 }}
+            {{ $bio := index $row 6 }}
+            {{ $interests := index $row 7 }}
+            {{ $email := index $row 8 }}
+            {{ $scholar := index $row 9 }}
+            {{ $linkedin := index $row 10 }}
+            {{ $twitter := index $row 11 }}
+            {{ $github := index $row 12 }}
+            {{ $orcid := index $row 13 }}
+
+            {{ $avatarSrc := $dummyAvatar }}
+            {{ if $photo }}
+              {{ with resources.Get (printf "media/people/%s" $photo) }}
+                {{ $avatarSrc = .RelPermalink }}
+              {{ end }}
+            {{ end }}
+
+            <div class="col-12">
+              <div class="card border-0 rounded-4 overflow-hidden member-card p-4 shadow-sm" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.25) !important;">
+                <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
+                  <div class="member-avatar-wrapper flex-shrink-0 text-center">
+                    <img src="{{ $avatarSrc }}" alt="{{ $name }}" class="member-avatar rounded-circle shadow-sm" style="width: 140px; height: 140px; object-fit: cover; border: 3px solid #2dd4bf; box-shadow: 0 0 20px rgba(45, 212, 191, 0.25) !important;">
+                    <div class="mt-2"><span class="badge bg-primary-subtle text-teal">Head of Lab</span></div>
+                  </div>
+                  <div class="member-details flex-grow-1 text-center text-md-start">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-1">
+                      <h3 class="member-name fw-bold text-white mb-0 fs-4">{{ $name }}</h3>
+                      <span class="text-teal small fw-semibold"><i class="fas fa-microscope me-1"></i> Principal Investigator</span>
+                    </div>
+                    <div class="member-role text-muted small fw-medium mb-2">{{ $role }} • iBRIC-inStem, Bangalore</div>
+                    {{ if $edu }}
+                      <div class="member-edu text-muted small mb-2" style="font-size: 0.85rem;">
+                        <i class="fas fa-graduation-cap me-1 text-teal opacity-75"></i> {{ $edu }}
+                      </div>
+                    {{ end }}
+                    <p class="member-bio text-light small mb-3" style="font-size: 0.9rem; line-height: 1.6;">
+                      {{ $bio }}
+                    </p>
+                    {{ if $interests }}
+                      <div class="member-interests d-flex flex-wrap gap-1 mb-3 justify-content-center justify-content-md-start">
+                        {{ range (split $interests ";") }}
+                          <span class="badge bg-dark text-muted border border-secondary border-opacity-25 small px-2 py-1">{{ trim . " " }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                    <div class="member-links d-flex align-items-center gap-3 pt-2 border-top border-secondary border-opacity-15 justify-content-center justify-content-md-start">
+                      {{ if $email }}<a href="mailto:{{ $email }}" class="text-muted hover-teal" title="Email"><i class="fas fa-envelope fs-5"></i></a>{{ end }}
+                      {{ if $scholar }}<a href="{{ $scholar }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal" title="Google Scholar"><i class="ai ai-google-scholar fs-5"></i></a>{{ end }}
+                      {{ if $linkedin }}<a href="{{ $linkedin }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal" title="LinkedIn"><i class="fab fa-linkedin fs-5"></i></a>{{ end }}
+                      {{ if $twitter }}<a href="{{ $twitter }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal" title="Twitter/X"><i class="fab fa-x-twitter fs-5"></i></a>{{ end }}
+                      {{ if $github }}<a href="{{ $github }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal" title="GitHub"><i class="fab fa-github fs-5"></i></a>{{ end }}
+                      {{ if $orcid }}<a href="{{ $orcid }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal" title="ORCID"><i class="ai ai-orcid fs-5"></i></a>{{ end }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* TIER 2: Postdoctoral Fellows */}}
+    <div class="tier-wrapper mb-5">
+      <div class="tier-heading d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <i class="fas fa-microscope text-teal fs-4"></i>
+        <h2 class="text-white fw-bold fs-4 mb-0">Postdoctoral Fellows</h2>
+      </div>
+
+      <div class="row g-4">
+        {{ range $i, $row := $members }}
+          {{ if and (gt $i 0) (eq (index $row 0) "2") }}
+            {{ $name := index $row 2 }}
+            {{ $role := index $row 3 }}
+            {{ $photo := index $row 4 }}
+            {{ $edu := index $row 5 }}
+            {{ $bio := index $row 6 }}
+            {{ $interests := index $row 7 }}
+            {{ $email := index $row 8 }}
+            {{ $scholar := index $row 9 }}
+            {{ $linkedin := index $row 10 }}
+            {{ $twitter := index $row 11 }}
+            {{ $github := index $row 12 }}
+            {{ $orcid := index $row 13 }}
+
+            {{ $avatarSrc := $dummyAvatar }}
+            {{ if $photo }}
+              {{ with resources.Get (printf "media/people/%s" $photo) }}
+                {{ $avatarSrc = .RelPermalink }}
+              {{ end }}
+            {{ end }}
+
+            <div class="col-12 col-lg-6">
+              <div class="card h-100 border-0 rounded-4 overflow-hidden member-card p-3 shadow-sm d-flex flex-column justify-content-between" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+                <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-3">
+                  <div class="member-avatar-wrapper flex-shrink-0 text-center">
+                    <img src="{{ $avatarSrc }}" alt="{{ $name }}" class="member-avatar rounded-circle shadow-sm" style="width: 110px; height: 110px; object-fit: cover; border: 2px solid rgba(45, 212, 191, 0.35);">
+                  </div>
+                  <div class="member-details flex-grow-1 text-center text-sm-start">
+                    <h4 class="member-name fw-bold text-white mb-1 fs-5">{{ $name }}</h4>
+                    <div class="member-role text-teal small fw-semibold mb-1">{{ $role }}</div>
+                    {{ if $edu }}
+                      <div class="member-edu text-muted small mb-2" style="font-size: 0.78rem;">
+                        <i class="fas fa-graduation-cap me-1 opacity-75"></i> {{ $edu }}
+                      </div>
+                    {{ end }}
+                    <p class="member-bio text-muted small mb-2" style="font-size: 0.825rem; line-height: 1.45;">
+                      {{ $bio }}
+                    </p>
+                    {{ if $interests }}
+                      <div class="member-interests d-flex flex-wrap gap-1 mb-2 justify-content-center justify-content-sm-start">
+                        {{ range (split $interests ";") }}
+                          <span class="badge bg-dark text-muted border border-secondary border-opacity-25 small" style="font-size: 0.7rem;">{{ trim . " " }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
+                <div class="member-links d-flex align-items-center gap-2 pt-2 mt-2 border-top border-secondary border-opacity-10 justify-content-center justify-content-sm-start">
+                  {{ if $email }}<a href="mailto:{{ $email }}" class="text-muted hover-teal small" title="Email"><i class="fas fa-envelope"></i></a>{{ end }}
+                  {{ if $scholar }}<a href="{{ $scholar }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{{ end }}
+                  {{ if $linkedin }}<a href="{{ $linkedin }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{{ end }}
+                  {{ if $twitter }}<a href="{{ $twitter }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>{{ end }}
+                  {{ if $github }}<a href="{{ $github }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="GitHub"><i class="fab fa-github"></i></a>{{ end }}
+                  {{ if $orcid }}<a href="{{ $orcid }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="ORCID"><i class="ai ai-orcid"></i></a>{{ end }}
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* TIER 3: PhD Scholars & Graduate Students */}}
+    <div class="tier-wrapper mb-5">
+      <div class="tier-heading d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <i class="fas fa-user-graduate text-teal fs-4"></i>
+        <h2 class="text-white fw-bold fs-4 mb-0">PhD Scholars &amp; Graduate Students</h2>
+      </div>
+
+      <div class="row g-4">
+        {{ range $i, $row := $members }}
+          {{ if and (gt $i 0) (eq (index $row 0) "3") }}
+            {{ $name := index $row 2 }}
+            {{ $role := index $row 3 }}
+            {{ $photo := index $row 4 }}
+            {{ $edu := index $row 5 }}
+            {{ $bio := index $row 6 }}
+            {{ $interests := index $row 7 }}
+            {{ $email := index $row 8 }}
+            {{ $scholar := index $row 9 }}
+            {{ $linkedin := index $row 10 }}
+            {{ $twitter := index $row 11 }}
+            {{ $github := index $row 12 }}
+            {{ $orcid := index $row 13 }}
+
+            {{ $avatarSrc := $dummyAvatar }}
+            {{ if $photo }}
+              {{ with resources.Get (printf "media/people/%s" $photo) }}
+                {{ $avatarSrc = .RelPermalink }}
+              {{ end }}
+            {{ end }}
+
+            <div class="col-12 col-lg-6">
+              <div class="card h-100 border-0 rounded-4 overflow-hidden member-card p-3 shadow-sm d-flex flex-column justify-content-between" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+                <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-3">
+                  <div class="member-avatar-wrapper flex-shrink-0 text-center">
+                    <img src="{{ $avatarSrc }}" alt="{{ $name }}" class="member-avatar rounded-circle shadow-sm" style="width: 110px; height: 110px; object-fit: cover; border: 2px solid rgba(45, 212, 191, 0.35);">
+                  </div>
+                  <div class="member-details flex-grow-1 text-center text-sm-start">
+                    <h4 class="member-name fw-bold text-white mb-1 fs-5">{{ $name }}</h4>
+                    <div class="member-role text-teal small fw-semibold mb-1">{{ $role }}</div>
+                    {{ if $edu }}
+                      <div class="member-edu text-muted small mb-2" style="font-size: 0.78rem;">
+                        <i class="fas fa-graduation-cap me-1 opacity-75"></i> {{ $edu }}
+                      </div>
+                    {{ end }}
+                    <p class="member-bio text-muted small mb-2" style="font-size: 0.825rem; line-height: 1.45;">
+                      {{ $bio }}
+                    </p>
+                    {{ if $interests }}
+                      <div class="member-interests d-flex flex-wrap gap-1 mb-2 justify-content-center justify-content-sm-start">
+                        {{ range (split $interests ";") }}
+                          <span class="badge bg-dark text-muted border border-secondary border-opacity-25 small" style="font-size: 0.7rem;">{{ trim . " " }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
+                <div class="member-links d-flex align-items-center gap-2 pt-2 mt-2 border-top border-secondary border-opacity-10 justify-content-center justify-content-sm-start">
+                  {{ if $email }}<a href="mailto:{{ $email }}" class="text-muted hover-teal small" title="Email"><i class="fas fa-envelope"></i></a>{{ end }}
+                  {{ if $scholar }}<a href="{{ $scholar }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{{ end }}
+                  {{ if $linkedin }}<a href="{{ $linkedin }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{{ end }}
+                  {{ if $twitter }}<a href="{{ $twitter }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>{{ end }}
+                  {{ if $github }}<a href="{{ $github }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="GitHub"><i class="fab fa-github"></i></a>{{ end }}
+                  {{ if $orcid }}<a href="{{ $orcid }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="ORCID"><i class="ai ai-orcid"></i></a>{{ end }}
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* TIER 4: Project Assistants & Research Fellows */}}
+    <div class="tier-wrapper mb-4">
+      <div class="tier-heading d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <i class="fas fa-flask text-teal fs-4"></i>
+        <h2 class="text-white fw-bold fs-4 mb-0">Project Assistants &amp; Research Fellows</h2>
+      </div>
+
+      <div class="row g-4">
+        {{ range $i, $row := $members }}
+          {{ if and (gt $i 0) (eq (index $row 0) "4") }}
+            {{ $name := index $row 2 }}
+            {{ $role := index $row 3 }}
+            {{ $photo := index $row 4 }}
+            {{ $edu := index $row 5 }}
+            {{ $bio := index $row 6 }}
+            {{ $interests := index $row 7 }}
+            {{ $email := index $row 8 }}
+            {{ $scholar := index $row 9 }}
+            {{ $linkedin := index $row 10 }}
+            {{ $twitter := index $row 11 }}
+            {{ $github := index $row 12 }}
+            {{ $orcid := index $row 13 }}
+
+            {{ $avatarSrc := $dummyAvatar }}
+            {{ if $photo }}
+              {{ with resources.Get (printf "media/people/%s" $photo) }}
+                {{ $avatarSrc = .RelPermalink }}
+              {{ end }}
+            {{ end }}
+
+            <div class="col-12 col-lg-6">
+              <div class="card h-100 border-0 rounded-4 overflow-hidden member-card p-3 shadow-sm d-flex flex-column justify-content-between" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+                <div class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-3">
+                  <div class="member-avatar-wrapper flex-shrink-0 text-center">
+                    <img src="{{ $avatarSrc }}" alt="{{ $name }}" class="member-avatar rounded-circle shadow-sm" style="width: 110px; height: 110px; object-fit: cover; border: 2px solid rgba(45, 212, 191, 0.35);">
+                  </div>
+                  <div class="member-details flex-grow-1 text-center text-sm-start">
+                    <h4 class="member-name fw-bold text-white mb-1 fs-5">{{ $name }}</h4>
+                    <div class="member-role text-teal small fw-semibold mb-1">{{ $role }}</div>
+                    {{ if $edu }}
+                      <div class="member-edu text-muted small mb-2" style="font-size: 0.78rem;">
+                        <i class="fas fa-graduation-cap me-1 opacity-75"></i> {{ $edu }}
+                      </div>
+                    {{ end }}
+                    <p class="member-bio text-muted small mb-2" style="font-size: 0.825rem; line-height: 1.45;">
+                      {{ $bio }}
+                    </p>
+                    {{ if $interests }}
+                      <div class="member-interests d-flex flex-wrap gap-1 mb-2 justify-content-center justify-content-sm-start">
+                        {{ range (split $interests ";") }}
+                          <span class="badge bg-dark text-muted border border-secondary border-opacity-25 small" style="font-size: 0.7rem;">{{ trim . " " }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                </div>
+                <div class="member-links d-flex align-items-center gap-2 pt-2 mt-2 border-top border-secondary border-opacity-10 justify-content-center justify-content-sm-start">
+                  {{ if $email }}<a href="mailto:{{ $email }}" class="text-muted hover-teal small" title="Email"><i class="fas fa-envelope"></i></a>{{ end }}
+                  {{ if $scholar }}<a href="{{ $scholar }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{{ end }}
+                  {{ if $linkedin }}<a href="{{ $linkedin }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="LinkedIn"><i class="fab fa-linkedin"></i></a>{{ end }}
+                  {{ if $twitter }}<a href="{{ $twitter }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>{{ end }}
+                  {{ if $github }}<a href="{{ $github }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="GitHub"><i class="fab fa-github"></i></a>{{ end }}
+                  {{ if $orcid }}<a href="{{ $orcid }}" target="_blank" rel="noopener noreferrer" class="text-muted hover-teal small" title="ORCID"><i class="ai ai-orcid"></i></a>{{ end }}
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

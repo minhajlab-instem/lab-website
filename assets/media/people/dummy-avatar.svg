@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#111c33" />
+    </linearGradient>
+    <linearGradient id="avatar-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" />
+      <stop offset="50%" stop-color="#0d9488" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="98" fill="url(#bg-grad)" stroke="url(#ring-grad)" stroke-width="2.5" />
+
+  <!-- Subtle Inner Grid / Orbit Lines -->
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#2dd4bf" stroke-width="0.75" stroke-dasharray="4 6" opacity="0.25" />
+
+  <!-- Head -->
+  <circle cx="100" cy="74" r="32" fill="url(#avatar-grad)" opacity="0.92" filter="url(#glow)" />
+
+  <!-- Shoulders & Torso with Lab Coat Collar Motif -->
+  <path d="M 46 174 C 46 132, 68 116, 100 116 C 132 116, 154 132, 154 174 Z" fill="url(#avatar-grad)" opacity="0.88" filter="url(#glow)" />
+  
+  <!-- Subtle Lab Coat V-Neck Accent -->
+  <path d="M 90 120 L 100 142 L 110 120 Z" fill="#0b1120" opacity="0.6" />
+</svg>

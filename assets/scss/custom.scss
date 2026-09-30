@@ -405,6 +405,83 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
   font-size: 0.85rem;
 }
 
+/* --------------------------------------------------------------------------
+   People Page & Horizontal Member Cards
+   -------------------------------------------------------------------------- */
+.tier-wrapper {
+  position: relative;
+}
+
+.tier-heading h2 {
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em;
+}
+
+.member-card {
+  border-radius: 16px !important;
+  background-color: #111c33 !important;
+  border: 1px solid rgba(45, 212, 191, 0.15) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.member-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: rgba(45, 212, 191, 0.45) !important;
+  box-shadow: 0 12px 30px -5px rgba(45, 212, 191, 0.15), 0 8px 16px -4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.member-avatar-wrapper {
+  position: relative;
+}
+
+.member-avatar {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  background-color: #0b1120;
+}
+
+.member-card:hover .member-avatar {
+  transform: scale(1.04);
+}
+
+.member-name {
+  color: #ffffff !important;
+  letter-spacing: -0.01em;
+}
+
+.member-role {
+  color: #2dd4bf !important;
+}
+
+.member-edu {
+  color: #94a3b8;
+}
+
+.member-bio {
+  color: #cbd5e1;
+}
+
+.member-links a {
+  color: #94a3b8 !important;
+  font-size: 1.05rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.member-links a:hover {
+  color: #2dd4bf !important;
+  background: rgba(45, 212, 191, 0.15);
+  transform: translateY(-2px);
+}
+
 /* Footer styling */
 .site-footer {
   border-top: 1px solid rgba(45, 212, 191, 0.15);
@@ -413,3 +490,4 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
   font-size: 0.85rem;
   color: #94a3b8;
 }
+
