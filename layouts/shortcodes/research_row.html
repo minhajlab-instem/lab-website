@@ -3,7 +3,7 @@
 
 {{ $researchPages := where site.RegularPages "Section" "research" }}
 <div class="research-row-wrapper my-4">
-  <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+  <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5">
     {{ range $researchPages }}
       {{ $img := .Resources.GetMatch "featured.*" }}
       <div class="col">
@@ -26,7 +26,7 @@
               </div>
               <div class="mt-3 pt-2 border-top border-secondary border-opacity-10 d-flex align-items-center text-teal small fw-semibold">
                 <span>Learn more</span>
-                <i class="fas fa-arrow-right ms-1 small"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
 
   <div class="text-center mt-4">
     <a href="/research/" class="btn btn-outline-info rounded-pill px-4 py-2 fw-semibold shadow-sm hover-glow-btn">
-      <i class="fas fa-microscope me-2"></i> View Full Research Programs & Projects →
+      <i class="fas fa-microscope me-2"></i> View Full Research Programs & Projects <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1 align-baseline"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
     </a>
   </div>
 </div>
