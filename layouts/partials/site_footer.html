@@ -81,7 +81,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // 3. Single-Click Sun / Moon Light & Dark Toggle Handler
+  function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.querySelector('.theme-icon-sun');
+    const moonIcon = document.querySelector('.theme-icon-moon');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+        if (sunIcon) sunIcon.classList.add('d-none');
+        if (moonIcon) moonIcon.classList.remove('d-none');
+      } else {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+        if (sunIcon) sunIcon.classList.remove('d-none');
+        if (moonIcon) moonIcon.classList.add('d-none');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('lab-theme') || (document.documentElement.classList.contains('dark') ? 'dark' : 'dark');
+    applyTheme(savedTheme);
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isDarkNow = document.documentElement.classList.contains('dark');
+        const nextTheme = isDarkNow ? 'light' : 'dark';
+        localStorage.setItem('lab-theme', nextTheme);
+        localStorage.setItem('wc-theme', nextTheme === 'dark' ? '2' : '1');
+        applyTheme(nextTheme);
+      });
+    }
+  }
+
   initImageZoom();
   highlightLabAuthors();
+  initThemeToggle();
 });
 </script>

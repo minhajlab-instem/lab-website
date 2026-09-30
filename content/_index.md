@@ -103,16 +103,4 @@ sections:
     content:
       title: "Science Communication & Outreach"
       subtitle: "Connecting Fundamental Cytoskeleton Science with Society"
-
-  - block: collection
-    content:
-      title: "Recent Publications"
-      subtitle: "Peer-reviewed findings and preprints from our group"
-      text: "Explore our latest structural insights, biosensors, and physiological studies."
-      page_type: publication
-      count: 4
-      order: desc
-    design:
-      view: citation
-      columns: 1
 ---

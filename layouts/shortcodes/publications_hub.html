@@ -1,0 +1,185 @@
+{{/* Shortcode: publications_hub.html */}}
+{{/* Consolidated Publication Hub: inStem Era vs Prior to inStem, Research vs Review badges, No Cite button */}}
+
+<div class="publications-hub-container my-4">
+  <!-- Category Selector: inStem Era vs Prior to inStem -->
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 border-bottom border-secondary border-opacity-25 pb-3">
+    <ul class="nav nav-pills gap-2" id="pubEraTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active rounded-pill px-4 py-2 fw-semibold" id="tab-instem-btn" data-bs-toggle="pill" data-bs-target="#tab-instem" type="button" role="tab" aria-controls="tab-instem" aria-selected="true">
+          <i class="fas fa-microscope text-teal me-2"></i> inStem Era (2015 – Present)
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="tab-pre-instem-btn" data-bs-toggle="pill" data-bs-target="#tab-pre-instem" type="button" role="tab" aria-controls="tab-pre-instem" aria-selected="false">
+          <i class="fas fa-history text-teal me-2"></i> Prior to inStem (Pre-2015)
+        </button>
+      </li>
+    </ul>
+
+    <!-- Type Filter Pills -->
+    <div class="d-flex align-items-center gap-2">
+      <span class="text-muted small fw-medium d-none d-sm-inline">Filter:</span>
+      <button class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 active pub-filter-btn" data-filter="all">All</button>
+      <button class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 pub-filter-btn" data-filter="research">Research</button>
+      <button class="btn btn-sm btn-outline-warning rounded-pill px-3 py-1 pub-filter-btn" data-filter="review">Reviews</button>
+    </div>
+  </div>
+
+  {{/* Fetch all publication regular pages sorted by date desc */}}
+  {{ $pubs := (where site.RegularPages "Section" "publication").ByDate.Reverse }}
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="pubEraTabsContent">
+    <!-- 1. inStem Era -->
+    <div class="tab-pane fade show active" id="tab-instem" role="tabpanel" aria-labelledby="tab-instem-btn">
+      <div class="d-flex flex-column gap-3">
+        {{ range $pubs }}
+          {{ $year := .Date.Format "2006" }}
+          {{ if ge (int $year) 2015 }}
+            {{ $isReview := or (in .Params.tags "Review") (eq .Params.article_type "review") (in (lower .Title) "review") }}
+            <div class="card p-3 rounded-4 shadow-sm border-0 pub-card-item" data-type="{{ if $isReview }}review{{ else }}research{{ end }}" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-2 flex-wrap">
+                <div class="d-flex align-items-center gap-2">
+                  {{ if $isReview }}
+                    <span class="badge bg-warning-subtle text-warning border border-warning border-opacity-25 px-2 py-1 small">
+                      <i class="fas fa-book-reader me-1"></i> Review Article
+                    </span>
+                  {{ else }}
+                    <span class="badge bg-primary-subtle text-teal border border-teal-subtle px-2 py-1 small">
+                      <i class="fas fa-flask me-1"></i> Research Article
+                    </span>
+                  {{ end }}
+                  <span class="text-muted small fw-semibold">{{ $year }}</span>
+                </div>
+                {{ with .Params.doi }}
+                  <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 small d-inline-flex align-items-center">
+                    DOI <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                {{ end }}
+              </div>
+
+              <h5 class="fw-bold fs-6 mb-2">
+                <a href="{{ .RelPermalink }}" class="text-white text-decoration-none hover-teal" style="line-height: 1.4;">
+                  {{ .Title }}
+                </a>
+              </h5>
+
+              <div class="li-cite-author text-muted small mb-1">
+                {{ range $idx, $author := .Params.authors }}
+                  {{ if gt $idx 0 }}, {{ end }}
+                  <span>{{ $author }}</span>
+                {{ end }}
+              </div>
+
+              {{ with .Params.publication }}
+                <div class="text-secondary fst-italic small">
+                  {{ . | markdownify }}
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- 2. Prior to inStem -->
+    <div class="tab-pane fade" id="tab-pre-instem" role="tabpanel" aria-labelledby="tab-pre-instem-btn">
+      <div class="d-flex flex-column gap-3">
+        {{ range $pubs }}
+          {{ $year := .Date.Format "2006" }}
+          {{ if lt (int $year) 2015 }}
+            {{ $isReview := or (in .Params.tags "Review") (eq .Params.article_type "review") (in (lower .Title) "review") }}
+            <div class="card p-3 rounded-4 shadow-sm border-0 pub-card-item" data-type="{{ if $isReview }}review{{ else }}research{{ end }}" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-2 flex-wrap">
+                <div class="d-flex align-items-center gap-2">
+                  {{ if $isReview }}
+                    <span class="badge bg-warning-subtle text-warning border border-warning border-opacity-25 px-2 py-1 small">
+                      <i class="fas fa-book-reader me-1"></i> Review Article
+                    </span>
+                  {{ else }}
+                    <span class="badge bg-primary-subtle text-teal border border-teal-subtle px-2 py-1 small">
+                      <i class="fas fa-flask me-1"></i> Research Article
+                    </span>
+                  {{ end }}
+                  <span class="text-muted small fw-semibold">{{ $year }}</span>
+                </div>
+                {{ with .Params.doi }}
+                  <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-info rounded-pill px-3 py-1 small d-inline-flex align-items-center">
+                    DOI <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </a>
+                {{ end }}
+              </div>
+
+              <h5 class="fw-bold fs-6 mb-2">
+                <a href="{{ .RelPermalink }}" class="text-white text-decoration-none hover-teal" style="line-height: 1.4;">
+                  {{ .Title }}
+                </a>
+              </h5>
+
+              <div class="li-cite-author text-muted small mb-1">
+                {{ range $idx, $author := .Params.authors }}
+                  {{ if gt $idx 0 }}, {{ end }}
+                  <span>{{ $author }}</span>
+                {{ end }}
+              </div>
+
+              {{ with .Params.publication }}
+                <div class="text-secondary fst-italic small">
+                  {{ . | markdownify }}
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Tab switching
+  const tabBtns = document.querySelectorAll('#pubEraTabs button[data-bs-toggle="pill"]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      const targetSelector = this.getAttribute('data-bs-target');
+      document.querySelectorAll('#pubEraTabsContent .tab-pane').forEach(pane => {
+        pane.classList.remove('show', 'active');
+      });
+      const targetPane = document.querySelector(targetSelector);
+      if (targetPane) {
+        targetPane.classList.add('show', 'active');
+      }
+    });
+  });
+
+  // Filter buttons
+  const filterBtns = document.querySelectorAll('.pub-filter-btn');
+  const pubCards = document.querySelectorAll('.pub-card-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.getAttribute('data-filter');
+
+      pubCards.forEach(card => {
+        const type = card.getAttribute('data-type');
+        if (filter === 'all' || type === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>

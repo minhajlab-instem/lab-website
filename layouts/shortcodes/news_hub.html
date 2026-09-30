@@ -1,0 +1,188 @@
+{{/* Shortcode: news_hub.html */}}
+{{/* Consolidated News Hub: Tabs for News, Outreach, Gallery, and Social Feed */}}
+
+<div class="news-hub-container my-4">
+  <!-- Nav Tabs -->
+  <ul class="nav nav-pills justify-content-center mb-4 gap-2 flex-wrap" id="newsTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active rounded-pill px-4 py-2 fw-semibold" id="tab-milestones-btn" data-bs-toggle="pill" data-bs-target="#tab-milestones" type="button" role="tab" aria-controls="tab-milestones" aria-selected="true">
+        <i class="fas fa-bullhorn me-2 text-teal"></i> News & Milestones
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="tab-outreach-btn" data-bs-toggle="pill" data-bs-target="#tab-outreach" type="button" role="tab" aria-controls="tab-outreach" aria-selected="false">
+        <i class="fas fa-book-open me-2 text-teal"></i> Science Outreach
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="tab-gallery-btn" data-bs-toggle="pill" data-bs-target="#tab-gallery" type="button" role="tab" aria-controls="tab-gallery" aria-selected="false">
+        <i class="fas fa-images me-2 text-teal"></i> Media Gallery
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link rounded-pill px-4 py-2 fw-semibold" id="tab-social-btn" data-bs-toggle="pill" data-bs-target="#tab-social" type="button" role="tab" aria-controls="tab-social" aria-selected="false">
+        <i class="fab fa-x-twitter me-2 text-teal"></i> Live Social Feed
+      </button>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content" id="newsTabsContent">
+    <!-- 1. News & Milestones -->
+    <div class="tab-pane fade show active" id="tab-milestones" role="tabpanel" aria-labelledby="tab-milestones-btn">
+      {{ $milestonesData := site.Data.milestones }}
+      <div class="row g-4">
+        <div class="col-12 col-lg-8 mx-auto">
+          <div class="card p-4 rounded-4 shadow-sm border-0" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-2 border-secondary border-opacity-25">
+              <h4 class="fw-bold mb-0 text-white fs-5">
+                <i class="fas fa-thumbtack text-warning me-2"></i> Pinned Lab Milestones & Breakthroughs
+              </h4>
+              <span class="badge bg-primary-subtle text-teal">Latest Highlights</span>
+            </div>
+
+            <div class="milestones-timeline">
+              {{ range $milestonesData.milestones }}
+                <div class="milestone-item mb-4 pb-3 border-bottom border-secondary border-opacity-10">
+                  <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                    <span class="badge bg-{{ .badge_color }} text-white px-2 py-1 small">{{ .badge }}</span>
+                    <span class="text-secondary small fw-medium">{{ .date }}</span>
+                  </div>
+                  <h5 class="fs-6 fw-bold mb-1">
+                    <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" class="text-white text-decoration-none hover-teal">
+                      {{ .title }} <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1 text-muted"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                  </h5>
+                  <p class="text-muted small mb-0">{{ .summary }}</p>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Science Outreach -->
+    <div class="tab-pane fade" id="tab-outreach" role="tabpanel" aria-labelledby="tab-outreach-btn">
+      <div class="row g-4">
+        <div class="col-12 text-center mb-2">
+          <p class="text-muted mx-auto" style="max-width: 800px;">
+            Connecting fundamental molecular biology with society, classrooms, and young minds through popular science books, documentaries, and interactive workshops.
+          </p>
+        </div>
+        <div class="col-12">
+          {{/* Render outreach initiatives collection */}}
+          <div class="row g-4 row-cols-1 row-cols-md-2">
+            {{ range (where site.RegularPages "Section" "outreach") }}
+              {{ $img := .Resources.GetMatch "featured.*" }}
+              <div class="col">
+                <div class="card h-100 rounded-4 overflow-hidden shadow-sm border-0" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+                  {{ if $img }}
+                    <img src="{{ $img.RelPermalink }}" alt="{{ .Title }}" class="w-100" style="height: 220px; object-fit: cover;">
+                  {{ end }}
+                  <div class="card-body p-4 d-flex flex-column justify-content-between">
+                    <div>
+                      <h4 class="card-title fw-bold text-white fs-5 mb-2">{{ .Title }}</h4>
+                      <p class="text-muted small mb-3">{{ .Params.summary }}</p>
+                    </div>
+                    <div class="pt-2 border-top border-secondary border-opacity-15">
+                      <a href="{{ .RelPermalink }}" class="text-teal fw-semibold text-decoration-none small d-inline-flex align-items-center">
+                        Read initiative details <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Media Gallery -->
+    <div class="tab-pane fade" id="tab-gallery" role="tabpanel" aria-labelledby="tab-gallery-btn">
+      <div class="row g-4">
+        <div class="col-12 text-center mb-2">
+          <p class="text-muted mx-auto" style="max-width: 800px;">
+            High-resolution microscopy imaging, gliding motility assays, lab retreats, and moments from the bench. Click any image to view in full-screen zoom.
+          </p>
+        </div>
+        <div class="col-12">
+          {{ if (templates.Exists "partials/shortcodes/lab_gallery.html") }}
+            {{ partial "shortcodes/lab_gallery.html" . }}
+          {{ else }}
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="card rounded-4 overflow-hidden border-0 shadow-sm" style="background-color: #111c33;">
+                  <img src="/media/gallery/clarity-heart.jpg" alt="Tissue Clearing Heart" class="w-100 rounded-4" style="height: 240px; object-fit: cover;">
+                  <div class="p-3"><p class="text-muted small mb-0">CLARITY tissue clearing of intact cardiomyocyte network</p></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card rounded-4 overflow-hidden border-0 shadow-sm" style="background-color: #111c33;">
+                  <img src="/media/gallery/gliding-assay.gif" alt="Microtubule Gliding" class="w-100 rounded-4" style="height: 240px; object-fit: cover;">
+                  <div class="p-3"><p class="text-muted small mb-0">TIRF in vitro microtubule gliding motility assay</p></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card rounded-4 overflow-hidden border-0 shadow-sm" style="background-color: #111c33;">
+                  <img src="/media/gallery/tyrosination-sensor.gif" alt="Tyrosination Sensor" class="w-100 rounded-4" style="height: 240px; object-fit: cover;">
+                  <div class="p-3"><p class="text-muted small mb-0">Live-cell fluorescent sensor tracking tubulin tyrosination</p></div>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Live Social Feed -->
+    <div class="tab-pane fade" id="tab-social" role="tabpanel" aria-labelledby="tab-social-btn">
+      <div class="row g-4 justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card p-4 rounded-4 shadow-sm border-0" style="background-color: #111c33; border: 1px solid rgba(45, 212, 191, 0.15) !important;">
+            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2 border-secondary border-opacity-25">
+              <h5 class="fw-bold mb-0 text-white d-flex align-items-center">
+                <i class="fab fa-x-twitter text-teal me-2"></i> Live from @inStem_Bangalore
+              </h5>
+              <span class="badge bg-primary-subtle text-teal">Real-Time</span>
+            </div>
+            <p class="text-muted small mb-3">Live posts and announcements directly from our scientific network.</p>
+            
+            <div class="twitter-timeline-container" style="max-height: 600px; overflow-y: auto; border-radius: 12px; background: rgba(6, 11, 20, 0.6); padding: 0.5rem;">
+              <a class="twitter-timeline" data-theme="dark" data-chrome="noheader,nofooter,noborders,transparent" data-tweet-limit="5" href="https://twitter.com/inStem_Bangalore?ref_src=twsrc%5Etfw">
+                Tweets by @inStem_Bangalore
+              </a>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const newsTabBtns = document.querySelectorAll('#newsTabs button[data-bs-toggle="pill"]');
+  newsTabBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      newsTabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      const targetSelector = this.getAttribute('data-bs-target');
+      document.querySelectorAll('#newsTabsContent .tab-pane').forEach(pane => {
+        pane.classList.remove('show', 'active');
+      });
+      const targetPane = document.querySelector(targetSelector);
+      if (targetPane) {
+        targetPane.classList.add('show', 'active');
+      }
+    });
+  });
+});
+</script>

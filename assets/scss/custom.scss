@@ -8,39 +8,30 @@
   --lab-teal-dark: #0f766e;
   --lab-teal-light: #2dd4bf;
   --lab-teal-subtle: #f0fdfa;
-  --lab-dark-bg: #0b1120;
+  --lab-canvas-bg: #f8fafc;
+  --lab-card-bg: #ffffff;
+  --lab-card-border: rgba(13, 148, 136, 0.2);
+  --lab-text-primary: #0f172a;
+  --lab-text-muted: #64748b;
+  --lab-navbar-bg: rgba(255, 255, 255, 0.92);
+}
+
+.dark, html.dark body, body.dark {
+  --lab-canvas-bg: #0b1120;
   --lab-card-bg: #111c33;
-  --lab-border-subtle: rgba(45, 212, 191, 0.15);
-  color-scheme: dark light;
+  --lab-card-border: rgba(45, 212, 191, 0.15);
+  --lab-text-primary: #e2e8f0;
+  --lab-text-muted: #94a3b8;
+  --lab-navbar-bg: rgba(11, 17, 32, 0.88);
 }
 
-/* --------------------------------------------------------------------------
-   Layout Width & Container Constraints (Fixes "too wide" feeling)
-   -------------------------------------------------------------------------- */
-.container,
-.universal-wrapper {
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 1.25rem !important;
-  padding-right: 1.25rem !important;
-}
-
-.home-section {
-  padding: 3rem 0 !important;
-}
-
-/* Constrain dark page body */
+/* Constrain page body with dynamic theme switching */
 body {
   font-size: 0.935rem;
   line-height: 1.6;
-  background-color: #0b1120;
-  color: #e2e8f0;
-}
-
-.dark {
-  background-color: #0b1120 !important;
-  color: #e2e8f0 !important;
+  background-color: var(--lab-canvas-bg) !important;
+  color: var(--lab-text-primary) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* --------------------------------------------------------------------------
@@ -579,5 +570,31 @@ h6, .h6 { font-size: 0.85rem !important; font-weight: 600; }
   text-decoration: underline !important;
   text-decoration-color: rgba(45, 212, 191, 0.5) !important;
   text-underline-offset: 3px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Publications Hub Styling & Hide Cite Button
+   -------------------------------------------------------------------------- */
+.js-cite-modal,
+a.js-cite-modal,
+a[data-filename*="cite.bib"] {
+  display: none !important;
+}
+
+.pub-card-item {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.pub-card-item:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(45, 212, 191, 0.45) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
+.pub-filter-btn.active {
+  background-color: #2dd4bf !important;
+  color: #0b1120 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 10px rgba(45, 212, 191, 0.4) !important;
 }
 
